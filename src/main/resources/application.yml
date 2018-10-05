@@ -1,0 +1,12 @@
+app:
+  job:
+    interval: 10
+  data:
+    directory:
+      in: ${user.home}\data\in
+      out: ${user.home}\data\out
+      processing: ${user.home}\data\processing
+    file:
+      extension:
+          reader: .dat
+          write: .done.dat
