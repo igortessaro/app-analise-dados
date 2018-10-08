@@ -4,43 +4,6 @@ public class Vendedor {
     public static final String LAYOUT = "001";
     private static final int QUANTIDADECOLUNAS = 4;
 
-    private String cpf;
-    private String nome;
-    private Double salario;
-    private String erroImportacao;
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public Double getSalario() {
-        return salario;
-    }
-
-    public void setSalario(Double salario) {
-        this.salario = salario;
-    }
-
-    public String getErroImportacao() {
-        return erroImportacao;
-    }
-
-    public void setErroImportacao(String erroImportacao) {
-        this.erroImportacao = erroImportacao;
-    }
-
     public Vendedor(String[] linhaArquivo) {
         String erro = this.validarLinhaArquivo(linhaArquivo);
 
@@ -63,6 +26,23 @@ public class Vendedor {
         this.nome = nome;
         this.salario = salario;
         this.erroImportacao = erroImportacao;
+    }
+
+    private String cpf;
+    private String nome;
+    private Double salario;
+    private String erroImportacao;
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getErroImportacao() {
+        return erroImportacao;
     }
 
     public static Vendedor build(String cpf, String nome, Double salario){

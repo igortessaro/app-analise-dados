@@ -65,10 +65,6 @@ public class DiretorioService {
         }
     }
 
-    public void deletarArquivoProcessado(String nome){
-
-    }
-
     public List<File> obterArquivos(final String diretorio, final String arquivoExtensao){
         File diretorioArquivos = new File(diretorio);
 

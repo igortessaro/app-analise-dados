@@ -4,43 +4,6 @@ public class Cliente {
     public static final String LAYOUT = "002";
     private static final int QUANTIDADECOLUNAS = 4;
 
-    private String cnpj;
-    private String nome;
-    private String areaAtuacao;
-    private String erroImportacao;
-
-    public String getCnpj() {
-        return cnpj;
-    }
-
-    public void setCnpj(String cnpj) {
-        this.cnpj = cnpj;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getAreaAtuacao() {
-        return areaAtuacao;
-    }
-
-    public void setAreaAtuacao(String areaAtuacao) {
-        this.areaAtuacao = areaAtuacao;
-    }
-
-    public String getErroImportacao() {
-        return erroImportacao;
-    }
-
-    public void setErroImportacao(String erroImportacao) {
-        this.erroImportacao = erroImportacao;
-    }
-
     public Cliente(String[] linhaArquivo) {
         String erro = this.validarLinhaArquivo(linhaArquivo);
 
@@ -63,6 +26,19 @@ public class Cliente {
         this.nome = nome;
         this.areaAtuacao = areaAtuacao;
         this.erroImportacao = erroImportacao;
+    }
+
+    private String cnpj;
+    private String nome;
+    private String areaAtuacao;
+    private String erroImportacao;
+
+    public String getCnpj() {
+        return cnpj;
+    }
+
+    public String getErroImportacao() {
+        return erroImportacao;
     }
 
     public static Cliente build(String cnpj, String nome, String areaAtuacao){

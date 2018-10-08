@@ -57,38 +57,6 @@ public class Arquivo {
     private List<Vendedor> vendedores;
     private List<String> erros;
 
-    public List<Cliente> getClientes() {
-        return clientes;
-    }
-
-    public void setClientes(List<Cliente> clientes) {
-        this.clientes = clientes;
-    }
-
-    public List<Venda> getVendas() {
-        return vendas;
-    }
-
-    public void setVendas(List<Venda> vendas) {
-        this.vendas = vendas;
-    }
-
-    public List<Vendedor> getVendedores() {
-        return vendedores;
-    }
-
-    public void setVendedores(List<Vendedor> vendedores) {
-        this.vendedores = vendedores;
-    }
-
-    public List<String> getErros() {
-        return erros;
-    }
-
-    public void setErros(List<String> erros) {
-        this.erros = erros;
-    }
-
     public void adicionarCliente(Cliente cliente){
         this.clientes.add(cliente);
     }
@@ -136,10 +104,6 @@ public class Arquivo {
         }else {
             this.vendedores.add(vendedor);
         }
-    }
-
-    public void adicionarErro(String erro){
-        this.erros.add(erro);
     }
 
     public void adicionarErro(int linha, String erro){
@@ -283,9 +247,5 @@ public class Arquivo {
 
     private Boolean possuiClientes(){
         return this.clientes != null && this.clientes.size() > 0;
-    }
-
-    private Boolean possuiErros(){
-        return this.erros != null && this.erros.size() > 0;
     }
 }

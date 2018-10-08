@@ -19,43 +19,6 @@ public class Venda {
         this.vendedor = vendedor;
     }
 
-    private Integer codigo;
-    private String vendedor;
-    private List<Item> itens;
-    private List<String> errosImportacao;
-
-    public Integer getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(Integer codigo) {
-        this.codigo = codigo;
-    }
-
-    public String getVendedor() {
-        return vendedor;
-    }
-
-    public void setVendedor(String vendedor) {
-        this.vendedor = vendedor;
-    }
-
-    public List<Item> getItens() {
-        return itens;
-    }
-
-    public void setItens(List<Item> itens) {
-        this.itens = itens;
-    }
-
-    public List<String> getErrosImportacao() {
-        return errosImportacao;
-    }
-
-    public void setErrosImportacao(List<String> errosImportacao) {
-        this.errosImportacao = errosImportacao;
-    }
-
     public Venda(String[] linhaArquivo) {
         this();
         String erro = this.validarLinhaArquivo(linhaArquivo);
@@ -84,6 +47,23 @@ public class Venda {
         }catch (Exception ex){
             this.errosImportacao.add("Erro ao converter valores.");
         }
+    }
+
+    private Integer codigo;
+    private String vendedor;
+    private List<Item> itens;
+    private List<String> errosImportacao;
+
+    public Integer getCodigo() {
+        return codigo;
+    }
+
+    public String getVendedor() {
+        return vendedor;
+    }
+
+    public List<String> getErrosImportacao() {
+        return errosImportacao;
     }
 
     public Double obterValorTotal(){
