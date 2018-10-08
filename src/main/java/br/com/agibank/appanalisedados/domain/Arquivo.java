@@ -1,11 +1,8 @@
 package br.com.agibank.appanalisedados.domain;
 
-import lombok.Getter;
-
 import java.util.*;
 import java.util.stream.Collectors;
 
-@Getter
 public class Arquivo {
     public Arquivo(){
         this.clientes = new ArrayList<>();
@@ -59,6 +56,38 @@ public class Arquivo {
     private List<Venda> vendas;
     private List<Vendedor> vendedores;
     private List<String> erros;
+
+    public List<Cliente> getClientes() {
+        return clientes;
+    }
+
+    public void setClientes(List<Cliente> clientes) {
+        this.clientes = clientes;
+    }
+
+    public List<Venda> getVendas() {
+        return vendas;
+    }
+
+    public void setVendas(List<Venda> vendas) {
+        this.vendas = vendas;
+    }
+
+    public List<Vendedor> getVendedores() {
+        return vendedores;
+    }
+
+    public void setVendedores(List<Vendedor> vendedores) {
+        this.vendedores = vendedores;
+    }
+
+    public List<String> getErros() {
+        return erros;
+    }
+
+    public void setErros(List<String> erros) {
+        this.erros = erros;
+    }
 
     public void adicionarCliente(Cliente cliente){
         this.clientes.add(cliente);

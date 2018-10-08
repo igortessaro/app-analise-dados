@@ -1,10 +1,5 @@
 package br.com.agibank.appanalisedados.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-
-@Data
-@AllArgsConstructor
 public class Vendedor {
     public static final String LAYOUT = "001";
     private static final int QUANTIDADECOLUNAS = 4;
@@ -13,6 +8,38 @@ public class Vendedor {
     private String nome;
     private Double salario;
     private String erroImportacao;
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public Double getSalario() {
+        return salario;
+    }
+
+    public void setSalario(Double salario) {
+        this.salario = salario;
+    }
+
+    public String getErroImportacao() {
+        return erroImportacao;
+    }
+
+    public void setErroImportacao(String erroImportacao) {
+        this.erroImportacao = erroImportacao;
+    }
 
     public Vendedor(String[] linhaArquivo) {
         String erro = this.validarLinhaArquivo(linhaArquivo);
@@ -31,6 +58,13 @@ public class Vendedor {
         }
     }
 
+    public Vendedor(String cpf, String nome, Double salario, String erroImportacao){
+        this.cpf = cpf;
+        this.nome = nome;
+        this.salario = salario;
+        this.erroImportacao = erroImportacao;
+    }
+
     public static Vendedor build(String cpf, String nome, Double salario){
         return new Vendedor(cpf, nome, salario, null);
     }
@@ -45,5 +79,28 @@ public class Vendedor {
         }
 
         return null;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+
+        if (!Vendedor.class.isAssignableFrom(obj.getClass())) {
+            return false;
+        }
+
+        final Vendedor other = (Vendedor) obj;
+
+        if ((this.nome == null) ? (other.nome != null) : !this.nome.equals(other.nome)) {
+            return false;
+        }
+
+        if ((this.cpf == null) ? (other.cpf != null) : !this.cpf.equals(other.cpf)) {
+            return false;
+        }
+
+        return true;
     }
 }

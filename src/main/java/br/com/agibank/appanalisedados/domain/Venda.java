@@ -1,12 +1,9 @@
 package br.com.agibank.appanalisedados.domain;
 
-import lombok.Data;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-@Data
 public class Venda {
     public static final String LAYOUT = "003";
     private static final int QUANTIDADECOLUNAS = 4;
@@ -26,6 +23,38 @@ public class Venda {
     private String vendedor;
     private List<Item> itens;
     private List<String> errosImportacao;
+
+    public Integer getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(Integer codigo) {
+        this.codigo = codigo;
+    }
+
+    public String getVendedor() {
+        return vendedor;
+    }
+
+    public void setVendedor(String vendedor) {
+        this.vendedor = vendedor;
+    }
+
+    public List<Item> getItens() {
+        return itens;
+    }
+
+    public void setItens(List<Item> itens) {
+        this.itens = itens;
+    }
+
+    public List<String> getErrosImportacao() {
+        return errosImportacao;
+    }
+
+    public void setErrosImportacao(List<String> errosImportacao) {
+        this.errosImportacao = errosImportacao;
+    }
 
     public Venda(String[] linhaArquivo) {
         this();

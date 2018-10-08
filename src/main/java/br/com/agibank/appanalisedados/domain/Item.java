@@ -1,14 +1,43 @@
 package br.com.agibank.appanalisedados.domain;
 
-import lombok.Data;
-
-@Data
 public class Item {
     private static final int QUANTIDADECOLUNAS = 3;
     private Integer codigo;
     private Integer quantidade;
     private Double valor;
     private String erroImportacao;
+
+    public Integer getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(Integer codigo) {
+        this.codigo = codigo;
+    }
+
+    public Integer getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(Integer quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    public Double getValor() {
+        return valor;
+    }
+
+    public void setValor(Double valor) {
+        this.valor = valor;
+    }
+
+    public String getErroImportacao() {
+        return erroImportacao;
+    }
+
+    public void setErroImportacao(String erroImportacao) {
+        this.erroImportacao = erroImportacao;
+    }
 
     public Item(String linhaArquivo) {
         String[] item = linhaArquivo.split("-");
@@ -19,7 +48,6 @@ public class Item {
             this.erroImportacao = erro;
             return;
         }
-
 
         try{
             this.codigo = Integer.parseInt(item[0]);
