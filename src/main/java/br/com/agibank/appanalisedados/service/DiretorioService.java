@@ -1,10 +1,11 @@
 package br.com.agibank.appanalisedados.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
-import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -26,6 +27,8 @@ public class DiretorioService {
 
     @Value("${app.data.file.extension.write}")
     private String extensaoArquivoDevolucao;
+
+    Logger logger = LoggerFactory.getLogger(ProcessadorService.class);
 
     public String obterExtensaoArquivoEntrada(){
         return this.extensaoArquivoLeitura;
@@ -58,7 +61,7 @@ public class DiretorioService {
             Files.write(outPath, bytes);
         }
         catch (Exception ex){
-
+            logger.error("Erro ao escrever no arquivo '"+ nome +"': "+ex.getMessage(), ex);
         }
     }
 

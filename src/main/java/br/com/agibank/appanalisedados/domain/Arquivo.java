@@ -241,7 +241,7 @@ public class Arquivo {
         String layout = linhaArquivo[0];
 
         if(!this.layoutConhecido(layout)){
-            return "Layout "+layout+" não é um layout válido.";
+            return "Layout "+layout+" não é um layout válido";
         }
 
         return null;

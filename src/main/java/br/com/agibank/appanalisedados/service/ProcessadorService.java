@@ -1,15 +1,14 @@
 package br.com.agibank.appanalisedados.service;
 
 import br.com.agibank.appanalisedados.domain.Arquivo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.nio.charset.Charset;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +18,8 @@ public class ProcessadorService {
     private DiretorioService diretorioService;
 
     private String separador = "ç";
+
+    Logger logger = LoggerFactory.getLogger(ProcessadorService.class);
 
     public void processarArquivosAguardandoProcessamento(){
         List<File> arquivos = this.diretorioService.obterArquivosAguardandoProcessamento();
@@ -69,6 +70,7 @@ public class ProcessadorService {
             return result;
         }
         catch (Exception ex){
+            logger.error(ex.getMessage(), ex);
             return  new ArrayList<>();
         }
     }
