@@ -8,16 +8,16 @@ public class Item {
 
         String erro = this.validarLinhaArquivo(item);
 
-        if (erro != null && erro != ""){
+        if (erro != null && erro != "") {
             this.erroImportacao = erro;
             return;
         }
 
-        try{
+        try {
             this.codigo = Integer.parseInt(item[0]);
             this.quantidade = Integer.parseInt(item[1]);
             this.valor = Double.parseDouble(item[2]);
-        }catch (Exception ex){
+        } catch (Exception ex) {
             this.erroImportacao = "Erro ao converter valores.";
             return;
         }
@@ -38,16 +38,16 @@ public class Item {
         return erroImportacao;
     }
 
-    public Double obterValorTotal(){
+    public Double obterValorTotal() {
         return this.valor * this.quantidade;
     }
 
     public String validarLinhaArquivo(String[] linhaArquivo) {
-        if(linhaArquivo == null || linhaArquivo.length == 0){
+        if (linhaArquivo == null || linhaArquivo.length == 0) {
             return "Registro não possui itens.";
         }
 
-        if(linhaArquivo.length != this.QUANTIDADECOLUNAS){
+        if (linhaArquivo.length != this.QUANTIDADECOLUNAS) {
             return "Quantidade de colunas divergentes.";
         }
 

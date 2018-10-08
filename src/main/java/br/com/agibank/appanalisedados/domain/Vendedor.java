@@ -7,21 +7,21 @@ public class Vendedor {
     public Vendedor(String[] linhaArquivo) {
         String erro = this.validarLinhaArquivo(linhaArquivo);
 
-        if (erro != null && erro != ""){
+        if (erro != null && erro != "") {
             this.erroImportacao = erro;
             return;
         }
 
-        try{
+        try {
             this.cpf = linhaArquivo[1];
             this.nome = linhaArquivo[2];
             this.salario = Double.parseDouble(linhaArquivo[3]);
-        }catch (Exception ex){
+        } catch (Exception ex) {
             this.erroImportacao = "Erro ao converter valores.";
         }
     }
 
-    public Vendedor(String cpf, String nome, Double salario, String erroImportacao){
+    public Vendedor(String cpf, String nome, Double salario, String erroImportacao) {
         this.cpf = cpf;
         this.nome = nome;
         this.salario = salario;
@@ -45,16 +45,16 @@ public class Vendedor {
         return erroImportacao;
     }
 
-    public static Vendedor build(String cpf, String nome, Double salario){
+    public static Vendedor build(String cpf, String nome, Double salario) {
         return new Vendedor(cpf, nome, salario, null);
     }
 
     public String validarLinhaArquivo(String[] linhaArquivo) {
-        if(linhaArquivo == null || linhaArquivo.length == 0){
+        if (linhaArquivo == null || linhaArquivo.length == 0) {
             return "Linha em branco";
         }
 
-        if(linhaArquivo.length != this.QUANTIDADECOLUNAS){
+        if (linhaArquivo.length != this.QUANTIDADECOLUNAS) {
             return "Quantidade de colunas divergentes.";
         }
 

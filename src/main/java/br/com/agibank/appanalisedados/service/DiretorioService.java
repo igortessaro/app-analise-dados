@@ -30,53 +30,83 @@ public class DiretorioService {
 
     Logger logger = LoggerFactory.getLogger(ProcessadorService.class);
 
-    public String obterExtensaoArquivoEntrada(){
+    public String obterExtensaoArquivoEntrada() {
         return this.extensaoArquivoLeitura;
     }
 
-    public String obterDiretorioEntrada(){
+    public String obterDiretorioEntrada() {
         return this.diretorioEntrada;
     }
 
-    public String obterDiretorioSaida(){
+    public String obterDiretorioSaida() {
         return this.diretorioSaida;
     }
 
-    public Boolean diretorioExiste(final String path){
+    public Boolean diretorioExiste(final String path) {
         File diretorio = new File(path);
 
-        return diretorio.exists();
+        return this.diretorioExiste(diretorio);
     }
 
-    public List<File> obterArquivosAguardandoProcessamento(){
-        return this.obterArquivos(this.obterDiretorioEntrada(), this.extensaoArquivoLeitura);
+    public List<File> obterArquivosAguardandoProcessamento() {
+        return this.obterArquivos(this.diretorioEntrada, this.extensaoArquivoLeitura);
     }
 
-    public void escreverArquivoSaida(List<String> dados, String nome){
+    public void escreverArquivoSaida(List<String> dados, String nome) {
+        if (!this.diretorioExiste(this.diretorioSaida)) {
+            this.criarDiretorio(this.diretorioSaida);
+        }
+
         byte[] bytes = String.join("\n", dados).getBytes();
 
         Path outPath = Paths.get(this.diretorioSaida, nome + this.extensaoArquivoDevolucao);
 
         try {
             Files.write(outPath, bytes);
-        }
-        catch (Exception ex){
-            logger.error("Erro ao escrever no arquivo '"+ nome +"': "+ex.getMessage(), ex);
+        } catch (Exception ex) {
+            logger.error("Erro ao escrever no arquivo '" + nome + "': " + ex.getMessage(), ex);
         }
     }
 
-    public List<File> obterArquivos(final String diretorio, final String arquivoExtensao){
+    public List<File> obterArquivos(final String diretorio, final String arquivoExtensao) {
         File diretorioArquivos = new File(diretorio);
 
-        if(!diretorioArquivos.exists()){
+        if (!this.diretorioExiste(diretorioArquivos)) {
+            this.criarDiretorio(diretorio);
             return new ArrayList<File>();
         }
 
         List<File> arquivos = Arrays.stream(diretorioArquivos.listFiles())
                 .filter(arquivo -> arquivo.toString().endsWith(arquivoExtensao))
-                .map(a -> (File)a)
                 .collect(Collectors.toList());
 
         return arquivos;
+    }
+
+    private Boolean diretorioExiste(final File diretorio) {
+        Boolean result = diretorio.exists();
+
+        if (!result) {
+            this.logger.warn("Diretório '" + diretorio.getPath() + "' não encontrado.");
+        }
+
+        return result;
+    }
+
+    private Boolean criarDiretorio(final String path) {
+        File diretorio = new File(path);
+        return this.criarDiretorio(diretorio);
+    }
+
+    private Boolean criarDiretorio(final File diretorio) {
+        Boolean result = diretorio.mkdirs();
+
+        if (result) {
+            this.logger.info("Diretório '" + diretorio.getPath() + "' criado com sucesso.");
+        } else {
+            this.logger.info("Não foi possível criar o diretório '" + diretorio.getPath() + "'.");
+        }
+
+        return result;
     }
 }

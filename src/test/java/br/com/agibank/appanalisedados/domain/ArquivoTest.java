@@ -187,7 +187,7 @@ public class ArquivoTest {
     }
 
     private Cliente criarCliente(String cnpj, String nome, String areaAtuacao){
-        return Cliente.build(cnpj, nome, areaAtuacao);
+        return Cliente.create(cnpj, nome, areaAtuacao);
     }
 
     private Vendedor criarVendedor(String cpf, String nome, Double salario){

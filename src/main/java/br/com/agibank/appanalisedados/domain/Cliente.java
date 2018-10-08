@@ -7,25 +7,29 @@ public class Cliente {
     public Cliente(String[] linhaArquivo) {
         String erro = this.validarLinhaArquivo(linhaArquivo);
 
-        if (erro != null && erro != ""){
+        if (erro != null && erro != "") {
             this.erroImportacao = erro;
             return;
         }
 
-        try{
+        try {
             this.cnpj = linhaArquivo[1];
             this.nome = linhaArquivo[2];
             this.areaAtuacao = linhaArquivo[3];
-        }catch (Exception ex){
+        } catch (Exception ex) {
             this.erroImportacao = "Erro ao converter valores.";
         }
     }
 
-    public Cliente(String cnpj, String nome, String areaAtuacao, String erroImportacao){
+    public Cliente(String cnpj, String nome, String areaAtuacao, String erroImportacao) {
         this.cnpj = cnpj;
         this.nome = nome;
         this.areaAtuacao = areaAtuacao;
         this.erroImportacao = erroImportacao;
+    }
+
+    public static Cliente create(String cnpj, String nome, String areaAtuacao) {
+        return new Cliente(cnpj, nome, areaAtuacao, null);
     }
 
     private String cnpj;
@@ -41,16 +45,12 @@ public class Cliente {
         return erroImportacao;
     }
 
-    public static Cliente build(String cnpj, String nome, String areaAtuacao){
-        return new Cliente(cnpj, nome, areaAtuacao, null);
-    }
-
     public String validarLinhaArquivo(String[] linhaArquivo) {
-        if(linhaArquivo == null || linhaArquivo.length == 0){
+        if (linhaArquivo == null || linhaArquivo.length == 0) {
             return "Linha em branco";
         }
 
-        if(linhaArquivo.length != this.QUANTIDADECOLUNAS){
+        if (linhaArquivo.length != this.QUANTIDADECOLUNAS) {
             return "Quantidade de colunas divergentes.";
         }
 
