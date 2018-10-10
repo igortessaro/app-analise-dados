@@ -11,41 +11,6 @@ public class Arquivo {
         this.erros = new ArrayList<>();
     }
 
-    public Arquivo(List<String[]> arquivo) {
-        this();
-        if (arquivo == null || arquivo.size() == 0) {
-            return;
-        }
-
-        for (int i = 0; i < arquivo.size(); i++) {
-            String[] linhaArquivo = arquivo.get(i);
-
-            String erro = this.validarLinhaArquivo(linhaArquivo);
-
-            if (erro != null && erro != "") {
-                this.adicionarErro(i, erro);
-                continue;
-            }
-
-            String layout = linhaArquivo[0];
-
-            if (layout.equals(Cliente.LAYOUT)) {
-                Cliente cliente = new Cliente(linhaArquivo);
-                this.adicionarCliente(cliente, i);
-            }
-
-            if (layout.equals(Vendedor.LAYOUT)) {
-                Vendedor vendedor = new Vendedor(linhaArquivo);
-                this.adicionarVendedor(vendedor, i);
-            }
-
-            if (layout.equals(Venda.LAYOUT)) {
-                Venda venda = new Venda(linhaArquivo);
-                this.adicionarVenda(venda, i);
-            }
-        }
-    }
-
     private List<Cliente> clientes;
     private List<Venda> vendas;
     private List<Vendedor> vendedores;
@@ -189,30 +154,6 @@ public class Arquivo {
         }
 
         return result;
-    }
-
-    private String validarLinhaArquivo(String[] linhaArquivo) {
-        if (linhaArquivo == null || linhaArquivo.length == 0) {
-            return "Linha em branco";
-        }
-
-        String layout = linhaArquivo[0];
-
-        if (!this.layoutConhecido(layout)) {
-            return "Layout " + layout + " não é um layout válido";
-        }
-
-        return null;
-    }
-
-    private boolean layoutConhecido(String layout) {
-        List<String> layoutValidos = new ArrayList<>();
-
-        layoutValidos.add(Venda.LAYOUT);
-        layoutValidos.add(Vendedor.LAYOUT);
-        layoutValidos.add(Cliente.LAYOUT);
-
-        return layoutValidos.contains(layout);
     }
 
     private Vendedor obterVendedorSemVenda() {

@@ -1,7 +1,9 @@
 package br.com.agibank.appanalisedados.domain;
 
+import br.com.agibank.appanalisedados.factory.ArquivoFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -13,6 +15,9 @@ import static org.junit.Assert.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class ArquivoTest {
+    @Autowired
+    private ArquivoFactory arquivoFactory;
+
     @Test
     public void arquivo_sem_dados(){
         Arquivo arquivo = new Arquivo();
@@ -171,7 +176,7 @@ public class ArquivoTest {
         //003ç10ç[1-10-100,2-30-2.50,3-40-3.10]çDiego
         //003ç08ç[1-34-10,2-33-1.50,3-40-0.10]çRenato
 
-        Arquivo arquivo = new Arquivo(arquivoTemplat);
+        Arquivo arquivo = this.arquivoFactory.create(arquivoTemplat);
 
         Vendedor criarPiorVendedor = this.criarVendedor("3245678865434", "Renato", 40000.99D);
 
@@ -187,11 +192,11 @@ public class ArquivoTest {
     }
 
     private Cliente criarCliente(String cnpj, String nome, String areaAtuacao){
-        return Cliente.create(cnpj, nome, areaAtuacao);
+        return new Cliente(cnpj, nome, areaAtuacao);
     }
 
     private Vendedor criarVendedor(String cpf, String nome, Double salario){
-        return Vendedor.build(cpf, nome, salario);
+        return new Vendedor(cpf, nome, salario);
     }
 
     private Item criarItem(int codigo, int quantidade, Double valor){
@@ -199,6 +204,6 @@ public class ArquivoTest {
     }
 
     private Venda criarVenda(int codigo, String vendedor){
-        return Venda.build(codigo, vendedor);
+        return new Venda(codigo, vendedor);
     }
 }

@@ -1,6 +1,7 @@
 package br.com.agibank.appanalisedados.service;
 
 import br.com.agibank.appanalisedados.domain.Arquivo;
+import br.com.agibank.appanalisedados.factory.ArquivoFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,9 @@ public class ProcessadorService {
     @Autowired
     private DiretorioService diretorioService;
 
+    @Autowired
+    private ArquivoFactory arquivoFactory;
+
     private String separador = "ç";
 
     Logger logger = LoggerFactory.getLogger(ProcessadorService.class);
@@ -34,13 +38,15 @@ public class ProcessadorService {
 
     private void processarArquivo(File file) {
         List<String[]> arquivo = this.converterArquivo(file);
-        Arquivo arquivoDominio = new Arquivo(arquivo);
+        Arquivo arquivoDominio = this.arquivoFactory.create(arquivo);
+
+        if(arquivoDominio == null){
+            return;
+        }
 
         List<String> relatorio = arquivoDominio.obterRelatorio();
-        
         this.diretorioService.escreverArquivoSaida(relatorio, file.getName());
-
-        file.delete();
+        this.excluirArquivo(file);
     }
 
     private List<String[]> converterArquivo(File file){
@@ -74,5 +80,9 @@ public class ProcessadorService {
             logger.error(ex.getMessage(), ex);
             return  new ArrayList<>();
         }
+    }
+
+    private void excluirArquivo(File file){
+        file.delete();
     }
 }
