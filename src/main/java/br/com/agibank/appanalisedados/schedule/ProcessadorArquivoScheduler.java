@@ -21,7 +21,7 @@ public class ProcessadorArquivoScheduler {
             this.processadorService.processarArquivosAguardandoProcessamento();
         }
         catch (Exception ex){
-            logger.error(ex.getMessage(), ex);
+            logger.error("Erro ao executar o serviço de processamento de arquivos: '"+ex.getMessage()+"'.", ex);
         }
     }
 }

@@ -65,7 +65,7 @@ public class ProcessadorService {
             return result;
         }
         catch (Exception ex){
-            logger.error(ex.getMessage(), ex);
+            logger.error("Erro ao ler o arquivo '"+file.getPath()+"': "+ex.getMessage(), ex);
             return  new ArrayList<>();
         }
     }
