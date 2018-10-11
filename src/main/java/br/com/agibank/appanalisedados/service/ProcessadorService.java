@@ -7,12 +7,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ProcessadorService {
@@ -51,28 +52,15 @@ public class ProcessadorService {
 
     private List<String[]> converterArquivo(File file){
         try {
-            FileReader arquivo = new FileReader(file);
-            BufferedReader lerArquivo = new BufferedReader(arquivo);
+            String nomeArquivo = file.getName();
+            String caminhoArquivo = file.getPath().replace(nomeArquivo, "");
 
-            List<String[]> result = new ArrayList<>();
+            Path path = Paths.get(caminhoArquivo, nomeArquivo);
 
-            String linha = lerArquivo.readLine();
-
-            if(linha != null){
-                String[] primeiraLinhaSplit = linha.split(this.separador);
-                result.add(primeiraLinhaSplit);
-            }
-
-            while (linha != null) {
-                linha = lerArquivo.readLine();
-
-                if(linha != null) {
-                    String[] linhaSplit = linha.split(this.separador);
-                    result.add(linhaSplit);
-                }
-            }
-
-            arquivo.close();
+            List<String[]> result = Files.lines(path)
+                    .filter(p -> p != null)
+                    .map(p -> p.split(this.separador))
+                    .collect(Collectors.toList());
 
             return result;
         }

@@ -31,6 +31,7 @@ public class Venda {
 
         List<String> errosItens = itens.stream()
                 .map(i -> i.getErroImportacao())
+                .filter(e -> e != null)
                 .collect(Collectors.toList());
 
         if(errosItens != null && errosItens.size() > 0){
