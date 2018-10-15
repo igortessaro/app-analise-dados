@@ -30,15 +30,15 @@ public class DiretorioService {
 
     Logger logger = LoggerFactory.getLogger(ProcessadorService.class);
 
-    public String obterExtensaoArquivoEntrada() {
+    public String getExtensaoArquivoLeitura(){
         return this.extensaoArquivoLeitura;
     }
 
-    public String obterDiretorioEntrada() {
+    public String getDiretorioEntrada() {
         return this.diretorioEntrada;
     }
 
-    public String obterDiretorioSaida() {
+    public String getDiretorioSaida() {
         return this.diretorioSaida;
     }
 

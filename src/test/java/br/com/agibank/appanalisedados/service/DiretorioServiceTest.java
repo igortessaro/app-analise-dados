@@ -10,10 +10,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -23,7 +20,7 @@ public class DiretorioServiceTest {
 
     @Test
     public void diretorio_de_entrada_existente() {
-        String diretorioEntrada = this.service.obterDiretorioEntrada();
+        String diretorioEntrada = this.service.getDiretorioEntrada();
 
         Assert.assertNotNull(diretorioEntrada);
         Assert.assertTrue(this.service.diretorioExiste(diretorioEntrada));
@@ -31,7 +28,7 @@ public class DiretorioServiceTest {
 
     @Test
     public void diretorio_de_saida_existente() {
-        String diretorioSaida = this.service.obterDiretorioSaida();
+        String diretorioSaida = this.service.getDiretorioSaida();
 
         Assert.assertNotNull(diretorioSaida);
         Assert.assertTrue(this.service.diretorioExiste(diretorioSaida));
@@ -53,7 +50,7 @@ public class DiretorioServiceTest {
 
     @Test
     public void obter_arquivos_repositorio_vazio(){
-        String diretorioEntrada = this.service.obterDiretorioEntrada();
+        String diretorioEntrada = this.service.getDiretorioEntrada();
 
         File[] arquivos = new File(diretorioEntrada).listFiles();
 
@@ -69,11 +66,11 @@ public class DiretorioServiceTest {
 
     @Test
     public void obter_arquivos_repositorio_de_entrada(){
-        String diretorioEntrada = this.service.obterDiretorioEntrada();
+        String diretorioEntrada = this.service.getDiretorioEntrada();
 
         File[] arquivos = new File(diretorioEntrada).listFiles();
 
-        String arquivoExtensao = this.service.obterExtensaoArquivoEntrada();
+        String arquivoExtensao = this.service.getExtensaoArquivoLeitura();
 
         for (File arquivo : arquivos) {
             arquivo.delete();
@@ -96,11 +93,11 @@ public class DiretorioServiceTest {
 
     @Test
     public void obter_arquivos_repositorio_de_entrada_aguardando_processamento(){
-        String diretorioEntrada = this.service.obterDiretorioEntrada();
+        String diretorioEntrada = this.service.getDiretorioEntrada();
 
         File[] arquivos = new File(diretorioEntrada).listFiles();
 
-        String arquivoExtensao = this.service.obterExtensaoArquivoEntrada();
+        String arquivoExtensao = this.service.getExtensaoArquivoLeitura();
 
         for (File arquivo : arquivos) {
             arquivo.delete();
